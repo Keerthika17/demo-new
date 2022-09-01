@@ -90,50 +90,147 @@
 
 version = [{
     name: "froyo",
-    relseae_date: 15 - 06 - 2001,
-    bugs: ["voice bug", "voice control", "cameraclearity"],
-    features: "Scrolling Screenshots",
-    author: "muralidharan",
+    releseDate: "15 - 06 - 2001",
+    bug_Id: "EC846",
+    features: ["Scrolling Screenshots"],
+    author: ["Muralidharan"],
     type: "patch"
 },
 
 {
     name: "kitkat",
-    releseDate: 24 - 07 - 2002,
-    bugs: "sound breaking",
-    features: "Dark Mode",
-    author: "muralidharan",
+    releseDate: "24 - 07 - 2002",
+    bug_Id: "EC846",
+    features: ["Dark Mode", "Tv recording"],
+    author: ["Muralidharan"],
     type: "major"
 },
 
 
 {
     name: "Donut",
-    releseDate: 27 - 09 - 2001,
-    bugs: "voice search bug",
-    features: "google contacts",
-    author: "subramaniyam",
+    releseDate: "27 - 09 - 2001",
+    bug_Id: "EC848",
+    features: ["google contacts", "google maps"],
+    author: ["Subramaniyam"],
     type: "patch"
 },
 
 {
     name: "Jelly Bean",
-    releseDate: 14 - 05 - 2012,
-    bugs: "Time Not Showing On The Status Bar",
-    features: "TV recording",
-    author: "elan",
+    releseDate: "14 - 05 - 2012",
+    bug_Id: "EC849",
+    features: ["TV recording", "google contacts"],
+    author: ["Elan"],
     type: "enhancement"
 }]
-console.log("version", version)
 
-patch = version.filter(arr => arr.type.includes("patch"))
-major= version.filter(arr => arr.type.includes("major"))
-enhancement = version.filter(arr => arr.type.includes("enhancement"))
-console.log("patch", patch)
-console.log("major", major)
-console.log("enchance", enhancement )
+const bug_List = [{
+    bugs: ["voice bug", "voice control", "cameraclearity"],
+    bug_Id: "EC846",
+}
+    , {
+        bugs: ["sound breaking"],
+    bug_Id: "EC846",
+},
+{
+    bugs: ["voice search bug", "voice bug"],
+    bug_Id: "EC848",
+},
+{
+    bugs: ["Time Not Showing On The Status Bar"],
+    bug_Id: "EC849",
+}
+]
 
-findReleaseDate=version.filter(arr=>arr.releseDate.includes("2001"))
-console.log(findReleaseDate)
+function releaseDate(date) {  //finding the and the version name
+    findReleaseDate = version.filter(arr => arr.releseDate.includes(date))
+    console.log(`${findReleaseDate.length} version are released in this  year`)
+    name = findReleaseDate.map(n => n.name)
+    console.log("versionName", name)
+    console.log("-----------------------------------------------------------------------")
+}
+
+
+
+
+function findFeaturesName(string) { //features and length
+    findFeatures = version.filter(arr => arr.features.includes(string))
+    console.log(findFeatures.length, "version have the specific feature name")
+    console.table(findFeatures)
+    console.log("------------------------------------------------------------------------")
+}
+
+
+
+
+
+function findAuthorName(name) {   // finding author name
+    for (i = 0; i < version.length; i++) {
+        if (version[i].author == name) {
+            console.log(version[i])
+        }
+    }
+}
+
+function findType(versiontype) {  //finding the type
+    type = version.filter(arr => arr.type.includes(versiontype))
+    console.log(`${type.length} releases were types of ${versiontype}`)
+    console.table(type)
+    console.log("----------------------------------------------------------------------------")
+
+}
+
+console.log("--------------------------------------------------------------------------------")
+
+function authorName() {   //finding author count
+    arr = []
+    version.forEach(elements => {
+        for (i of elements.author)
+            arr.push(i)
+    })
+    count = 1
+    authorValue = 0
+    maxValue = 1
+    for (i = 0; i < arr.length; i++) {
+        for (j = 1; j < arr.length; j++) {
+            if (arr[i] == arr[j]) {
+                count++
+            }
+            if (maxValue < count) {
+                maxValue = count
+                authorValue = arr[i]
+            }
+        }
+        count = 0
+    }
+    console.log(`The Author ${authorValue} Has Worked ${maxValue} Releases`)
+}
+
+
+
+
+function findBug(value) {         //finding bugs
+    
+    console.log("quesno:1","Bugs:")
+    bug_List.forEach(element => {
+        if (element.bug_Id== value) {
+            console.log(element.bugs)
+        }
+    })
+    bugvalue = version.filter(n => n.bug_Id.includes(value))
+    console.log(`The version which have "${value}" ID.`)
+    console.table(bugvalue)
+    console.log("--------------------------------------------------------------------------------------")
+
+}
+
+
+findBug("EC846")
+findType("patch")
+findFeaturesName("Tv recording")
+releaseDate("2001")
+authorName()
+findAuthorName("Muralidharan")
 
 
