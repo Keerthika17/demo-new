@@ -91,8 +91,7 @@ function findType(versiontype: any) {
 }
 
 
-
-function authorName() {
+     function authorName() {
     let arr: any = []
     version.forEach(elements => {
         for (let i of elements.author)
